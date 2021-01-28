@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // id counter
     let idCounter = 0;
 
@@ -12,10 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function () {
         // increment id counter by 1
         idCounter++;
-        // create a div
-        let div = document.createElement('div');
-        div.className = 'square';
-        // div.id = 'id', idCounter);
-    })
+        // create a div called square
+        let square = document.createElement('div');
+        // set square class name to square
+        square.className = 'square';
+        // set square id to id counter
+        square.id = idCounter;        
+        // insert div within the body
+        document.body.appendChild(square);
+    });
 
+    // Math.floor(Math.random() * 256)
 })
