@@ -8,54 +8,82 @@ document.addEventListener('DOMContentLoaded', function () {
     button.appendChild(btnText);
     document.body.appendChild(button);
 
+    let container = document.createElement('div');
+    container.id = 'square-container';
+    document.body.appendChild(container);
+
+
     // add an event listener so when the  button is clicked, a new div should be added to the page
     button.addEventListener('click', function () {
         // increment id counter by 1
         idCounter++;
+        
         // create a div called square
         let square = document.createElement('div');
         // set square class name
         square.className = 'square';
         // set square id to id counter
-        square.id = idCounter;        
-        
+        square.id = idCounter;
+
         // create paragraph element
-        let p = document.createElement('p');       
+        let p = document.createElement('p');
         // the value of the square's id should display centered in the square               
-        let squareText = document.createTextNode(idCounter);        
+        let squareText = document.createTextNode(idCounter);
         p.appendChild(squareText);
         square.appendChild(p);
         // insert square within the body
-        document.body.appendChild(square);  
+        document.body.appendChild(square);
         // set opacity of p to 0 so text isn't visible
-        p.style.opacity = '0'; 
+        p.style.opacity = '0';
 
         // Add mouse enter event listener - when hovering over a square, the value of the square's id should display centered in the square
         square.addEventListener("mouseenter", function () {
             p.style.opacity = '1';
-         });
+        });
 
         // Add mouse leave event listener - the value of the square's id should disappear when the cursor is no longer over the square
-         square.addEventListener('mouseleave', function () {
-             p.style.opacity = '0';
-         });
+        square.addEventListener('mouseleave', function () {
+            p.style.opacity = '0';
+        });
 
-         // When a square is clicked, it should change to a random background color 
-         square.addEventListener('click', function () {
+        // When a square is clicked, it should change to a random background color 
+        square.addEventListener('click', function () {
             // random hex color generator (i.e. ##FF0000 is red)
             let letters = '0123456789ABCDEF';
             let color = '#';
             for (let i = 0; i < 6; i++) {
-              color += letters[Math.floor(Math.random() * 16)];
-              square.style.backgroundColor = color;
-            }                        
-         });
+                color += letters[Math.floor(Math.random() * 16)];
+                square.style.backgroundColor = color;
+            }
+        });
 
-         square.addEventListener('dbl-click', function () {
-            
-         });
-    });  
-    
+        // add event listener to square if double clicked
+        square.addEventListener('dblclick', function () {
+            // if the id of the square is even: The square after the clicked square should be removed from the page
+            if (square.id % 2 === 0) {
+                if (this.nextSibling) {
+                    this.nextSibling.remove();
+                }
+                // If there isn't a square after the clicked square, display an alert indicating so
+                else {
+                    alert('There are no squares to the right to remove.')
+                }
+
+            // if the id of the square is odd: the square before the clicked square should be removed from the page
+            } else {
+                if(square.id % 2 == 1) {
+                    if(this.previousSibling) {
+                        this.previousSibling.remove();
+                    }
+                }
+                // if there isn't a square before the clicked square, display an alert indicating so
+                else {
+                    alert('There are no squares to the left to remove.');
+                }
+            }
+        });
+    });
+
 
 
 })
