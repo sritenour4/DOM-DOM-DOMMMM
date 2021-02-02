@@ -4,15 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // use the DOM to to create and insert a button labeled 'Add Square' into the body
     let button = document.createElement('button');
-    let btnText = document.createTextNode('Add Square');
-    button.appendChild(btnText);
-    document.body.appendChild(button);
-
-    let container = document.createElement('div');
-    container.id = 'square-container';
-    document.body.appendChild(container);
-
-
+    button.textContent = 'Add Square';
+    
     // add an event listener so when the  button is clicked, a new div should be added to the page
     button.addEventListener('click', function () {
         // increment id counter by 1
@@ -28,12 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // create paragraph element
         let p = document.createElement('p');
         // the value of the square's id should display centered in the square               
-        let squareText = document.createTextNode(idCounter);
-        p.appendChild(squareText);
+        p.textContent = idCounter;
+               
         square.appendChild(p);
         // insert square within the body
-        document.body.appendChild(square);
-        // set opacity of p to 0 so text isn't visible
+       // set opacity of p to 0 so text isn't visible
         p.style.opacity = '0';
 
         // Add mouse enter event listener - when hovering over a square, the value of the square's id should display centered in the square
@@ -62,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // if the id of the square is even: The square after the clicked square should be removed from the page
             if (square.id % 2 === 0) {
                 if (this.nextSibling) {
-                    this.nextSibling.remove();
+                    squareContainer.removeChild(square.nextSibling);
                 }
                 // If there isn't a square after the clicked square, display an alert indicating so
                 else {
@@ -71,10 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // if the id of the square is odd: the square before the clicked square should be removed from the page
             } else {
-                if(square.id % 2 == 1) {
-                    if(this.previousSibling) {
-                        this.previousSibling.remove();
-                    }
+                if(square.previousSibling) {
+                        squareContainer.removeChild(square.previousSibling);
+                  
                 }
                 // if there isn't a square before the clicked square, display an alert indicating so
                 else {
@@ -82,8 +73,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
+
+        squareContainer.appendChild(square);
     });
 
-
-
-})
+    document.body.appendChild(button);
+    
+    let squareContainer = document.createElement('div');
+    squareContainer.id = 'square-container'; 
+    document.body.appendChild(squareContainer);  
+    
+});
