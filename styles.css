@@ -12,7 +12,6 @@
 }
 
 button {
-    position: absolute;    
     border-radius: 10px;
     background-color: cyan;
     font-size: larger;
