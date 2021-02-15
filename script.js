@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // id counter
     let idCounter = 0;
 
+    let container = document.createElement('main');
+    container.className = 'container';
+    document.body.appendChild(container);
+
     // use the DOM to to create and insert a button labeled 'Add Square' into the body
     let button = document.createElement('button');
     button.textContent = 'Add Square';
